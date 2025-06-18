@@ -1,13 +1,13 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import { onMount, createEventDispatcher } from 'svelte';
     
     export let textToType: string;
-
     export let speed: number = 150;
 
     let displayedText = '';
-
     let isTypingFinished = false;
+
+    const dispatch = createEventDispatcher();
 
     onMount(() => {
         let currentIndex = 0;
@@ -20,6 +20,7 @@
             } else {
                 clearInterval(interval);
                 isTypingFinished = true;
+                dispatch('done');
             }
         }, speed);
 
