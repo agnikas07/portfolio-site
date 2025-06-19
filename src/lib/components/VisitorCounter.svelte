@@ -32,14 +32,7 @@
         isLoading = true;
         await fetch('/api/increment', { method: 'POST' });
         isLoading = false;
-    }
-    else if (clickCount === 2) { 
-        isLoading = true;
-        await fetch('/api/increment', { method: 'POST' });
-        buttonState = 'damaged'; 
-        isLoading = false;
-    }
-    else if (clickCount === 3) { 
+    } else if (clickCount === 2) { 
         isLoading = true;
         await fetch('/api/increment', { method: 'POST' });
         buttonState = 'broken'; 
