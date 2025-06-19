@@ -5,7 +5,7 @@
 
 <style>
     .main-content.about-page {
-        background-color: #f0f8ff; /* Alice Blue - a different color for this page */
+        background-color: #f0f8ff;
         color: #333;
         display: flex;
         flex-direction: column;

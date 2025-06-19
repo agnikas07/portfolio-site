@@ -1,23 +1,56 @@
 <script lang="ts">
+  import { db } from '$lib/firebase';
   import { onMount, createEventDispatcher } from 'svelte';
   import { fly } from 'svelte/transition';
+  import { doc, onSnapshot } from 'firebase/firestore';
 
   let visitorCount = 6711;
   let clickCount = 0;
   let buttonState: 'normal' | 'damaged' | 'broken' = 'normal';
   let lowerAssemblyElement: HTMLElement;
+  let isLoading = false;
 
   const dispatch = createEventDispatcher();
+  const documentId = import.meta.env.VITE_PUBLIC_FIRESTORE_DOCUMENT_ID;
 
-  function handleButtonClick() {
+  onMount(() => {
+    const unsub = onSnapshot(doc(db, "counters", documentId), (doc) => {
+        if (doc.exists()) {
+            visitorCount = doc.data().count;
+        } else {
+            console.log("No such document!");
+        }
+    });
+    return () => unsub();
+  });
+
+  async function handleButtonClick() {
+    if (isLoading) return;
+
     clickCount++;
-    if (clickCount === 1) { visitorCount++; }
-    else if (clickCount === 2) { visitorCount++;buttonState = 'damaged'; }
-    else if (clickCount === 3) { visitorCount++; buttonState = 'broken'; dispatch('break', { element: lowerAssemblyElement }); }
+    if (clickCount === 1) { 
+        isLoading = true;
+        await fetch('/api/increment', { method: 'POST' });
+        isLoading = false;
+    }
+    else if (clickCount === 2) { 
+        isLoading = true;
+        await fetch('/api/increment', { method: 'POST' });
+        buttonState = 'damaged'; 
+        isLoading = false;
+    }
+    else if (clickCount === 3) { 
+        isLoading = true;
+        await fetch('/api/increment', { method: 'POST' });
+        buttonState = 'broken'; 
+        dispatch('break', { element: lowerAssemblyElement });
+        isLoading = false;
+    }
   }
 
   $: formattedCount = visitorCount.toString().padStart(4, '0');
 </script>
+
 <div class="counter-assembly">
   <div class="counter-box" transition:fly={{ y: -60, duration: 800, delay: 300 }}>
     <div class="counter-label">VISITORS</div>
@@ -32,6 +65,7 @@
     </div>
   </div>
 </div>
+
 <style>
   .counter-assembly { display: flex; flex-direction: column; align-items: center; }
   .counter-box { background: #444; border: 2px solid #222; border-radius: 6px; padding: 6px 12px; box-shadow: 0 3px 8px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1); display: inline-block; position: relative; z-index: 10; }
