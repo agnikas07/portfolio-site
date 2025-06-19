@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
-  import { page } from '$app/stores'; // NEW: Import the page store
+  import { page } from '$app/stores';
   import TerminalTyper from '$lib/components/TerminalTyper.svelte';
   import InteractiveTerminal from '$lib/components/InteractiveTerminal.svelte';
 
@@ -19,7 +18,6 @@
     {#if !introFinished}
       <TerminalTyper textToType={siteName} on:done={handleTypingDone} />
     {:else}
-      <!-- Pass the current path to the component -->
       <InteractiveTerminal currentPath={$page.url.pathname} />
     {/if}
   </header>

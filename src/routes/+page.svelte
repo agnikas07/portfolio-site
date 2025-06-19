@@ -6,7 +6,6 @@
   let revealContent = false;
   let showVisitorCounter = false;
 
-  // --- Physics Variables ---
   let engine: Matter.Engine;
   let runner: Matter.Runner;
   let brokenPiece: { element: HTMLElement, body: Matter.Body } | null = null;
@@ -69,7 +68,6 @@
 
     (function animate() {
         if (!engine) return;
-        // THIS IS THE FIX: The logic for updating the broken piece's position has been corrected.
         if (brokenPiece) {
             const { position, angle } = brokenPiece.body;
             brokenPiece.element.style.left = `${position.x}px`;
