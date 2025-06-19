@@ -32,7 +32,7 @@
     brokenPiece = { element: detail.element, body };
     Matter.Composite.add(engine.world, body);
 
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 40; i++) {
         const sparkBody = Matter.Bodies.circle(
             rect.left + rect.width / 2,
             rect.top,
@@ -40,8 +40,8 @@
             { friction: 0.05, restitution: 0.8, density: 0.0001 }
         );
         const sparkForce = {
-            x: (Math.random() - 0.5) * 0.05,
-            y: (Math.random() * 0.04)
+            x: (Math.random() - 0.5) * 0.01,
+            y: (Math.random() * 0.005)
         };
         Matter.Body.applyForce(sparkBody, sparkBody.position, sparkForce);
         Matter.Composite.add(engine.world, sparkBody);
@@ -94,9 +94,8 @@
                     const { position } = spark.body;
                     el.style.left = `${position.x}px`;
                     el.style.top = `${position.y}px`;
-                    const radius = spark.body.circleRadius ?? 4;
-                    el.style.width = `${radius * 2}px`;
-                    el.style.height = `${radius * 2}px`;
+                    el.style.width = `${(spark.body.circleRadius ?? 4) * 2}px`;
+                    el.style.height = `${(spark.body.circleRadius ?? 4) * 2}px`;
                     el.style.opacity = (spark.life / 120).toString();
                 }
             }
@@ -178,7 +177,7 @@
     box-shadow: 0 0 8px #ffdd59, 0 0 12px #ff6600, 0 0 16px #ffffff;
     pointer-events: none;
     transform: translate(-50%, -50%);
-    z-index: 500;
+    z-index: 250;
   }
 
   .content-overlay {
