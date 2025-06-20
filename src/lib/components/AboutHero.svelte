@@ -26,8 +26,6 @@
 
 <style>
   .hero-section {
-    position: sticky;
-    top: 80px;
     height: calc(100vh - 80px);
     background: #f0f8ff;
     display: flex;
@@ -35,6 +33,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
     z-index: 10;
     
     opacity: 0;
