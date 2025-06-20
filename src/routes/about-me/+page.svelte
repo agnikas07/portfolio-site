@@ -1,17 +1,30 @@
-<main class="main-content about-page">
-    <h1>About Me</h1>
-    <p>This is the about me page. More content will go here!</p>
+<script lang="ts">
+  import AboutHero from '$lib/components/AboutHero.svelte';
+  // I will add the timeline component here later
+</script>
+
+<main class="about-page-container">
+  <AboutHero />
+
+  <!-- The scrollable timeline will go here -->
+  <div class="timeline-placeholder">
+    <!-- Placeholder content for now -->
+    <h2>Timeline Coming Soon...</h2>
+  </div>
 </main>
 
 <style>
-    .main-content.about-page {
+    .about-page-container {
         background-color: #f0f8ff;
         color: #333;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
         min-height: calc(100vh - 80px);
+    }
+
+    .timeline-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 150vh;
+        text-align: center;
     }
 </style>
