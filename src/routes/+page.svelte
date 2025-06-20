@@ -66,6 +66,7 @@
     runner = Matter.Runner.create();
     Matter.Runner.run(runner, engine);
 
+    let animationFrameId: number;
     (function animate() {
         if (!engine) return;
         if (brokenPiece) {
@@ -94,14 +95,18 @@
             }
         });
         sparks = sparks.filter(s => s.life > 0);
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
     })();
+    
+    return () => {
+        cancelAnimationFrame(animationFrameId);
+        if (runner) Matter.Runner.stop(runner);
+        if (engine) Matter.Engine.clear(engine);
+    };
   });
-  
-  onDestroy(() => { if (runner) Matter.Runner.stop(runner); if (engine) Matter.Engine.clear(engine); });
 </script>
 
-<main class="main-content">
+<main class="main-content welcome-page">
   <div class="page-body">
     <div class="welcome-text">
       <h2>Welcome to my digital playground.</h2>

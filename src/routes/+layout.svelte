@@ -1,25 +1,15 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import TerminalTyper from '$lib/components/TerminalTyper.svelte';
-  import InteractiveTerminal from '$lib/components/InteractiveTerminal.svelte';
+  import { afterNavigate } from '$app/navigation';
+  import Terminal from '$lib/components/Terminal.svelte';
 
-  const siteName = "agnikas.dev";
-  let introFinished = false;
-
-  function handleTypingDone() {
-    setTimeout(() => {
-        introFinished = true;
-    }, 500);
-  }
+  afterNavigate(() => {
+    window.scrollTo(0, 0);
+  });
 </script>
 
 <div class="page-container">
   <header class="main-header">
-    {#if !introFinished}
-      <TerminalTyper textToType={siteName} on:done={handleTypingDone} />
-    {:else}
-      <InteractiveTerminal currentPath={$page.url.pathname} />
-    {/if}
+    <Terminal />
   </header>
 
   <slot />
@@ -32,6 +22,13 @@
     font-family: 'JetBrains Mono', monospace;
     background-color: black;
     overflow-x: hidden;
+  }
+  
+  :global(body:has(main.welcome-page)) {
+    overflow-y: hidden;
+  }
+  :global(body:has(main.about-page)) {
+    overflow-y: auto;
   }
 
   .page-container {
