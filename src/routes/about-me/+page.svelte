@@ -16,7 +16,7 @@
     {
       date: 'June 2025 - Present',
       title: 'Personal Portfolio Project',
-      description: 'Began working on a personal portfolio project to groom my online presence andshowcase my skills and projects. This project is a work in progress, but I am excited to share it with the world once it is complete.',
+      description: 'Began working on a personal portfolio project to groom my online presence and showcase my skills and projects. This project is a work in progress, but I am excited to share it with the world once it is complete.',
       side: 'left'
     },
     {
