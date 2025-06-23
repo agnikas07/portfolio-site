@@ -22,7 +22,15 @@
         window.location.href = `/${dir}`;
       } else if (dir === '..' || dir === '~' || dir === '/') {
         goto(`/`);
+      } else {
+        alert('Directory not found: ' + dir);
       }
+    } else if (trimmedCommand === 'clear') {
+      displayedText = '';
+    } else if (trimmedCommand === 'help' || trimmedCommand === 'ls') {
+      alert('Commands: cd, clear, help, ls\n\nAvailable directories: about-me, projects, contact');
+    } else if (trimmedCommand === 'exit') {
+      window.close();
     }
     command = '';
   }
