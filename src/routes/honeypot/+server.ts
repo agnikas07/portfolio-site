@@ -1,20 +1,22 @@
-import { error, type RequestHandler } from '@sveltejs/kit';
+// CORRECTED: Import RequestHandler from the auto-generated $types module
+import type { RequestHandler } from './$types';
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
+// The rest of your code is perfect and needs no changes.
 export const GET: RequestHandler = async (event) => {
-	const userAgent = event.request.headers.get('user-agent') || 'unknown';
-	const accept = event.request.headers.get('accept') || 'unknown';
-	const ip = event.getClientAddress();
+    const userAgent = event.request.headers.get('user-agent') || 'unknown';
+    const accept = event.request.headers.get('accept') || 'unknown';
+    const ip = event.getClientAddress();
 
-	console.log(`[HONEYPOT_HIT] IP: ${ip}`);
-	console.log(`[HONEYPOT_UA] User-Agent: ${userAgent}`);
-console.log(`[HONEYPOT_ACCEPT] Accept: ${accept}`);
-	console.log(`[HONEYPOT_URL] URL: ${event.request.url}`);
+    console.log(`[HONEYPOT_HIT] IP: ${ip}`);
+    console.log(`[HONEYPOT_UA] User-Agent: ${userAgent}`);
+    console.log(`[HONEYPOT_ACCEPT] Accept: ${accept}`);
+    console.log(`[HONEYPOT_URL] URL: ${event.request.url}`);
 
-	await sleep(30000);
+    await sleep(30000);
 
-	const fakeHtml = `
+    const fakeHtml = `
 		<!DOCTYPE html>
 		<html lang="en-US">
 		<head>
@@ -44,12 +46,12 @@ console.log(`[HONEYPOT_ACCEPT] Accept: ${accept}`);
 		</html>
 	`;
 
-	return new Response(fakeHtml, {
-		status: 200,
-		headers: {
-			'Content-Type': 'text/html; charset=utf-8',
-			'X-Powered-By': 'PHP/8.1.2',
-			'X-Honeypot-Triggered': 'true'
-		}
-	});
+    return new Response(fakeHtml, {
+        status: 200,
+        headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'X-Powered-By': 'PHP/8.1.2',
+            'X-Honeypot-Triggered': 'true'
+        }
+    });
 };
