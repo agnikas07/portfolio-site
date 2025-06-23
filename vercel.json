@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/wp-admin/setup-config.php",
+      "destination": "/honeypot"
+    },
+    {
+      "source": "/wordpress/wp-admin/setup-config.php",
+      "destination": "/honeypot"
+    }
+  ]
+}
