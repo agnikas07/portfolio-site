@@ -26,6 +26,7 @@
 	"dependencies": {
 		"@threlte/core": "^8.0.5",
 		"@threlte/extras": "^9.4.0",
+		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"firebase": "^11.9.1",
 		"firebase-admin": "^13.4.0",

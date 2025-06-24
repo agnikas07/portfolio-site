@@ -2,8 +2,10 @@
   import { afterNavigate } from '$app/navigation';
   import Terminal from '$lib/components/Terminal.svelte';
   import { injectSpeedInsights } from '@vercel/speed-insights';
+  import { injectAnalytics } from '@vercel/analytics/sveltekit';
 
   injectSpeedInsights();
+  injectAnalytics();
 
   afterNavigate(() => {
     window.scrollTo(0, 0);
