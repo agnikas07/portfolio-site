@@ -14,11 +14,13 @@
   let isFocused = false;
   $: displayPath = $page.url.pathname === '/' ? '~' : $page.url.pathname.substring(1);
 
+  let isTypingForUser = false;
+
   function handleCommand() {
     const trimmedCommand = command.trim();
     if (trimmedCommand.startsWith('cd ')) {
       const dir = trimmedCommand.split(' ')[1];
-      if (['about-me', 'projects', 'contact'].includes(dir)) {
+      if (['about-me', 'projects', 'contact', '404'].includes(dir)) {
         window.location.href = `/${dir}`;
       } else if (dir === '..' || dir === '~' || dir === '/') {
         goto(`/`);
@@ -33,6 +35,25 @@
       window.close();
     }
     command = '';
+  }
+
+  export async function runTerminalCommand(cmd: string) {
+    if (isTypingForUser || mode !== 'interactive') {
+      return;
+    }
+
+    isTypingForUser = true;
+    inputElement?.focus();
+    command = '';
+
+    for (const char of cmd) {
+      command += char;
+      await new Promise(r => setTimeout(r, 150));
+    }
+
+    await new Promise(r => setTimeout(r, 450));
+    handleCommand();
+    isTypingForUser = false;
   }
 
   onMount(() => {
