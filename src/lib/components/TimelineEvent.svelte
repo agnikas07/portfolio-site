@@ -1,10 +1,15 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { Suspense } from "@threlte/extras";
+    import { Canvas, T } from "@threlte/core";
+    import { GLTF, OrbitControls } from "@threlte/extras";
 
     export let date: string;
     export let title: string;
     export let description: string;
     export let side: 'left' | 'right';
+    export let modelUrl: string | undefined = undefined;
+    export let cameraFov: number | undefined = 75;
 
     let element: HTMLElement;
     let inView = false;
@@ -18,7 +23,7 @@
                 }
             },
             {
-                threshold: 0.45
+                threshold: 0.1
             }
         );
 
@@ -37,9 +42,38 @@
         </div>
     </div>
     <div class="model-wrapper">
-        <div class="model-placeholder">
-            3D Model Here
-        </div>
+        {#if inView && modelUrl}
+            <div class="model-canvas-container">
+                <Canvas>
+                    <T.AmbientLight intensity={1.5} />
+                    <T.DirectionalLight position={[3, 5, 2]} intensity={2.5} />
+
+                    <T.PerspectiveCamera makeDefault position={[0, 1, 5]} fov={cameraFov} >
+                        <OrbitControls
+                            enableZoom={false}
+                            enablePan={false}
+                            autoRotate={true}
+                            autoRotateSpeed={1.0}
+                            target={[0, 0.5, 0]}
+                        />
+                    </T.PerspectiveCamera>
+
+                    <Suspense>
+                        <GLTF url={modelUrl} scale={0.8} />
+                        <svelte:fragment slot="fallback">
+                            <T.Mesh position={[0, 0.5, 0]}>
+                                <T.BoxGeometry />
+                                <T.MeshStandardMaterial color="hotpink" wireframe={true} />
+                            </T.Mesh>
+                        </svelte:fragment>
+                    </Suspense>
+                </Canvas>
+            </div>
+        {:else}
+            <div class="model-placeholder">
+                3D Model Placeholder
+            </div>
+        {/if}
     </div>
 </div>
 
@@ -121,16 +155,26 @@
         line-height: 1.6;
     }
 
-    .model-placeholder {
-        height: 200px;
+    .model-placeholder,
+    .model-canvas-container {
+        height: 100%;
         width: 100%;
-        background-color: #e0eaf1;
+        background-color: transparent;
         border-radius: 6px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: bold;
         color: #a0b4c2;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        /* box-shadow: 0 4px 20px rgba(0,0,0,0.08); */
+        overflow: hidden;
+    }
+
+    .model-canvas-container {
+      background-color: #f0f8ff;
+      cursor: grab;
+    }
+    .model-canvas-container:active {
+      cursor: grabbing;
     }
 </style>

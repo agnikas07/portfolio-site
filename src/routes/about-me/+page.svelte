@@ -9,6 +9,8 @@
       title: string;
       description: string;
       side: TimelineSide;
+      modelUrl?: string;
+      cameraFov?: number;
     }
     
   // Sample data for the timeline. This data is AI generated because I was lazy. I will be updating it with my actual experiences later.
@@ -17,7 +19,9 @@
       date: 'June 2025 - Present',
       title: 'Personal Portfolio Project',
       description: 'Began working on a personal portfolio project to groom my online presence and showcase my skills and projects. This project is a work in progress, but I am excited to share it with the world once it is complete.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/retro_computer.glb',
+      cameraFov: 85
     },
     {
       date: 'June 9th, 2024',
@@ -164,6 +168,8 @@
         title={event.title}
         description={event.description}
         side={event.side}
+        modelUrl={event.modelUrl}
+        cameraFov={event.cameraFov}
       />
     {/each}
   </div>
