@@ -123,37 +123,47 @@
       date: 'approx. 11,700 B.C.E.',
       title: 'Beginning of the Holocene Epoch',
       description: 'The Holocene Epoch began around 11,700 years ago, marking the end of the last Ice Age and the beginning of a warmer and more stable climate. This period saw the rise of human civilization, with the development of agriculture, the domestication of animals, and the establishment of permanent settlements. The Holocene has been characterized by significant changes in the Earth\'s climate, ecosystems, and human societies.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/caveman.glb',
+      cameraFov: 15
     },
     {
       date: '2.6 Million B.C.E. - 11,700 B.C.E.',
       title: 'Pleistocene Epoch',
       description: 'The Pleistocene Epoch, also known as the Ice Age, lasted from about 2.6 million years ago to around 11,700 years ago. It was characterized by repeated glaciations, where large ice sheets covered much of the Northern Hemisphere. The Pleistocene saw the evolution and extinction of many species, including the woolly mammoth and saber-toothed cat. It was during this time that early humans began to develop tools and migrate across the globe.',
-      side: 'right'
+      side: 'right',
+      modelUrl: '/models/mammoth.glb',
+      cameraFov: 30
     },
     {
       date: '66 Million B.C.E. - Present',
       title: 'Cenozoic Era',
       description: 'The Cenozoic Era, also known as the Age of Mammals, began around 66 million years ago and continues to the present day. It is characterized by the rise of mammals and birds, the diversification of flowering plants, and significant geological and climatic changes. The Cenozoic has seen the evolution of many modern species, including humans, and has been marked by several mass extinctions and climate shifts.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/flowers.glb',
+      cameraFov: 35
     },
     {
       date: '252 Million B.C.E. - 66 Million B.C.E.',
       title: 'Mesozoic Era',
       description: 'The Mesozoic Era, also known as the Age of Reptiles, lasted from about 252 million years ago to around 66 million years ago. It was characterized by the dominance of dinosaurs, the evolution of birds and mammals, and the development of flowering plants. The Mesozoic saw significant geological and climatic changes, including the breakup of the supercontinent Pangaea and the rise of modern continents. Some of the characters of the hit film "Jurassic Park" were based on dinosaurs from this era.',
-      side: 'right'
+      side: 'right',
+      modelUrl: '/models/dinosaur.glb',
+      cameraFov: 25
     },
     {
       date: '541 Million B.C.E. - 252 Million B.C.E.',
       title: 'Paleozoic Era',
       description: 'The Paleozoic Era lasted from about 541 million years ago to around 252 million years ago. It was characterized by the diversification of marine life, the evolution of land plants and animals, and significant geological changes. The Paleozoic saw the development of complex ecosystems, including coral reefs, forests, and amphibians, and ended with one of the largest mass extinctions in Earth\'s history.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/fish.glb',
+      cameraFov: 30
     },
     {
       date: '2.5 Billion B.C.E. - 541 Million B.C.E.',
       title: 'Proterozoic Eon',
       description: 'The Proterozoic Eon lasted from about 2.5 billion years ago to around 541 million years ago. It was characterized by the development of simple life forms, including bacteria and algae, and the gradual buildup of oxygen in the atmosphere. The Proterozoic saw the emergence of multicellular organisms and the first evidence of sexual reproduction, setting the stage for the explosion of life in the subsequent Paleozoic Era.',
-      side: 'right'
+      side: 'right',
     },
     {
       date: '4 Billion B.C.E. - 2.5 Billion B.C.E.',
@@ -171,7 +181,9 @@
       date: '13.8 Billion B.C.E.',
       title: 'The Big Bang',
       description: 'The Big Bang is the leading explanation for the origin of the universe, occurring approximately 13.8 billion years ago. It marks the beginning of space and time, as well as the formation of all matter and energy in the universe. The Big Bang theory describes how the universe expanded from an extremely hot and dense state, leading to the formation of galaxies, stars, and planets over billions of years.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/atom.glb',
+      cameraFov: 65
     }
   ];
 </script>
