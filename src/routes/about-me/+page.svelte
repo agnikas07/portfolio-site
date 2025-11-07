@@ -27,55 +27,73 @@
       date: 'June 9th, 2024',
       title: 'Just Married!',
       description: 'I married Rebecca, my best friend, in the North Georgia Mountains. Rebecca has been my biggest supporter and has encouraged me to pursue my dreams. I am so grateful to have her in my life.',
-      side: 'right'
+      side: 'right',
+      modelUrl: '/models/diamond_ring.glb',
+      cameraFov: 30
     },
     {
       date: '2024 - Present',
       title: 'Software Engineer at Wetmore Enterprises',
       description: 'As a full-stack developer, I contributed to several different projects, including co-engineering a lead distribution SaaS from concept to having active users in just five months. I modernized business operations by migrating over 150,000 records to a centralized database and automating manual processes. I experienced rapid growth, and developed data management skills and the ability to deliver impactful solutions in a fast paced, agile environemnt.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/python_logo.glb',
+      cameraFov: 85
     },
     {
       date: '2023 - 2024',
       title: 'Marketing Representative at RangeWater Real Estate',
       description: 'I worked as a top performing marketing and property management professional with expereience in the competitive Atlanta multi-family real estate market. I successfully managed property operations, including vendor relations and maintenance, while handling high-volume communications and resident relations. I was recognized as an "Ultimate Leaser," and I took on some project management and introductory IT responsibilities. This is where I began to use software development in my professional life, and I started to learn more about the field.',
-      side: 'right'
+      side: 'right',
+      modelUrl: '/models/apartment.glb',
+      cameraFov: 40
     },
     {
       date: '2022 - 2023',
       title: 'Sous Chef at Marietta Melt Yard',
       description: 'I opened a new restaurant in Marietta, GA, as the opening sous chef. I helped to develop the menu, manage inventory, train staff, and ensure high standards of food quality and safety. This experience honed my ability to work under intense pressure, manage multiple tasks simultaneously, and maintain a high level of attention to detail.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/burger.glb',
+      cameraFov: 25
     },
     {
       date: '2019 - 2023',
       title: 'Line Cook at Prime 120',
       description: 'I worked as a line cook at Prime 120, a high-end steakhouse in Woodstock, GA. I was responsible for preparing and cooking food to order, ensuring that all dishes met the restaurant\'s high standards of quality and presentation. This experience quickly taught me to work efficiently under intense pressure, manage my time effectively, and maintain a high level of attention to detail.',
-      side: 'right'
+      side: 'right',
+      modelUrl: '/models/stew_pot.glb',
+      cameraFov: 15
     },
     {
       date: '2018 - 2019',
       title: 'Bartender at Partners Pizza',
       description: 'I worked as a bartender at Partners Pizza, a popular local restaurant in Woodstock, GA. I was responsible for preparing and serving drinks, managing the bar area, and serving food to customers. This experience taught me how to work in a fast-paced environment, manage multiple tasks simultaneously, and maintain a positive attitude under pressure.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/beer.glb',
+      cameraFov: 85
     },
     {
       date: '2017 - 2019',
       title: 'Server/Bartender at ICE Martini Bar',
       description: 'I worked as a server and bartender at ICE Martini Bar, a popular local bar in Woodstock, GA. I was responsible for serving drinks, managing the bar area, and providing excellent customer service. This was my introduction to the service industry, and I obtained ServeSafe certification during this time. I developed many different skills during this time that I would carry with me throughout my career.',
-      side: 'right'
+      side: 'right',
+      modelUrl: '/models/cocktail.glb',
+      cameraFov: 35
     },
     {
       date: '2015 - 2019',
       title: 'Attended Kennesaw State University',
       description: 'I attended Kennesaw State University, where I studied psychology. I learned about human behavior, cognitive processes, and social interactions. This experience helped me to develop a strong understanding of how people think and behave, which has been invaluable in my career as a software engineer.',
-      side: 'left'
+      side: 'left',
+      modelUrl: '/models/books.glb',
+      cameraFov: 45
     },
     {
       date: '2015',
       title: 'Graduated from Sequoyah High School',
       description: 'I graduated from Sequoyah High School in Canton, GA. During my time there, I was involved in various extracurricular activities and developed a strong work ethic and an intense drive to learn that has carried me through my career. Through multiple introductory computer science classes, I discovered my passion for software development and began to explore the field further.',
-      side: 'right'
+      side: 'right',
+      modelUrl: '/models/graduation_cap.glb',
+      cameraFov: 30
     },
     {
       date: '2015 - 2017',
