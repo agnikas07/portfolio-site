@@ -18,25 +18,60 @@
       terminalInstance.runTerminalCommand(command);
     }
   }
+
+  let lightsOut = false;
+  let mouseX = 0;
+  let mouseY = 0;
+
+  function toggleLight(event: MouseEvent) {
+    lightsOut = !lightsOut;
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  }
+
+  function handleMouseMovement(event: MouseEvent) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  }
 </script>
+
+<svelte:window on:mousemove={lightsOut ? handleMouseMovement : null} />
 
 <div class="page-container">
   <header class="main-header">
     <Terminal bind:this={terminalInstance}/>
-    <nav class='simple-nav'>
-      <button on:click={() => navClick('cd ~')}>Home</button>
-      <span>/</span>
-      <button on:click={() => navClick('cd about-me')}>About</button>
-      <span>/</span>
-      <button on:click={() => navClick('cd projects')}>Projects</button>
-      <span>/</span>
-      <button on:click={() => navClick('cd contact')}>Contact</button>
-    </nav>
+
+    <div class="header-right-side">
+      <button
+        class="light-toggle"
+        on:click={toggleLight}
+        title="enable dark mode"
+      >
+        💡
+      </button>
+
+      <nav class='simple-nav'>
+        <button on:click={() => navClick('cd ~')}>Home</button>
+        <span>/</span>
+        <button on:click={() => navClick('cd about-me')}>About</button>
+        <span>/</span>
+        <button on:click={() => navClick('cd projects')}>Projects</button>
+        <span>/</span>
+        <button on:click={() => navClick('cd contact')}>Contact</button>
+      </nav>
+    </div>
   </header>
 
   <slot />
 
 </div>
+
+{#if lightsOut}
+  <div
+    class="flashlight-overlay"
+    style="--mouse-x: {mouseX}px; --mouse-y: {mouseY}px;"
+  ></div>
+{/if}
 
 <style>
   :global(body) {
@@ -64,6 +99,13 @@
     box-sizing: border-box; z-index: 200;
   }
 
+  .header-right-side {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 1.5rem;
+  }
+
   .simple-nav {
     display: flex;
     align-items: center;
@@ -89,5 +131,37 @@
   .simple-nav span {
     color: #555;
     user-select: none;
+  }
+
+  .light-toggle {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.2s ease;
+    margin-left: auto;
+    margin-right: 1.5rem;
+    line-height: 1;
+  }
+
+  .light-toggle:hover {
+    color: #f0f0f0;
+  }
+
+  .flashlight-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(
+      circle at var(--mouse-x) var(--mouse-y),
+      transparent 150px,
+      rgba(0, 0, 0, 0.98) 250px
+    );
+    z-index: 199;
+    pointer-events: none;
   }
 </style>
