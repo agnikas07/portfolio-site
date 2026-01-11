@@ -2,9 +2,6 @@
     import { fade } from 'svelte/transition';
     import { crossfade } from 'svelte/transition';
     import { cubicOut, quintOut } from 'svelte/easing';
-    import { env } from '$env/dynamic/public';
-
-    const FORMSPREE_ID = env.PUBLIC_FORMSPREE_ID;
 
     interface ServiceNode {
         id: string;
