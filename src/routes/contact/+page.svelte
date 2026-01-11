@@ -47,7 +47,7 @@
       <span class="icon">📡</span> ESTABLISH COMMS
     </h1>
     <p class="subtitle">
-      Send a secure transmission. I usually respond within 24 hours.
+      Send a secure transmission. I usually respond within 24-48 hours.
     </p>
 
     <div class="terminal-card">
