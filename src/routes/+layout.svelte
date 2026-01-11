@@ -35,6 +35,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>agnikas.dev</title>
+</svelte:head>
+
 <svelte:window on:mousemove={lightsOut ? handleMouseMovement : null} />
 
 <div class="page-container">
@@ -54,6 +58,8 @@
         <button on:click={() => navClick('cd ~')}>Home</button>
         <span>/</span>
         <button on:click={() => navClick('cd about-me')}>About</button>
+        <span>/</span>
+        <button on:click={() => navClick('cd services')}>Services</button>
         <span>/</span>
         <button on:click={() => navClick('cd projects')}>Projects</button>
         <span>/</span>

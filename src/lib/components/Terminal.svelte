@@ -20,7 +20,7 @@
     const trimmedCommand = command.trim();
     if (trimmedCommand.startsWith('cd ')) {
       const dir = trimmedCommand.split(' ')[1];
-      if (['about-me', 'projects', 'contact', '404'].includes(dir)) {
+      if (['about-me', 'projects', 'contact', '404', 'services'].includes(dir)) {
         window.location.href = `/${dir}`;
       } else if (dir === '..' || dir === '~' || dir === '/') {
         goto(`/`);
