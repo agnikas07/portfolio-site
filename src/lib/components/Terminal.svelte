@@ -6,6 +6,7 @@
   let mode: 'typing' | 'interactive' = 'typing';
 
   const siteName = "agnikas.dev";
+  const devStart = siteName.indexOf('.dev');
   let displayedText = '';
   const typingSpeed = 150;
 
@@ -80,7 +81,13 @@
 
 {#if mode === 'typing'}
   <div class="typing-container">
-    <span class="typed-text">{displayedText}</span>
+    <span class="typed-text">
+      {#if displayedText.length <= devStart}
+        {displayedText}
+      {:else}
+        {displayedText.slice(0, devStart)}<span class="prompt-dev">{displayedText.slice(devStart)}</span>
+      {/if}
+    </span>
     <span class="typing-cursor"></span>
   </div>
 {:else}
@@ -88,7 +95,7 @@
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div class="interactive-container" on:click={() => inputElement.focus()}>
-    <span class="prompt-static">agnikas.dev/{displayPath} $</span>
+    <span class="prompt-static">agnikas<span class="prompt-dev">.dev</span>/{displayPath} $</span>
     <form on:submit|preventDefault={handleCommand} class="input-form">
       <div class="input-wrapper">
         <span class="command-display">{command}</span>
@@ -122,6 +129,9 @@
   }
   .prompt-static {
     margin-right: 0.5rem; font-weight: bold; white-space: nowrap;
+  }
+  .prompt-dev {
+    color: #B0E0E6;
   }
   .input-form, .input-wrapper {
     display: flex; align-items: center; flex-grow: 1; position: relative;
