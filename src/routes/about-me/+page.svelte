@@ -1,233 +1,356 @@
 <script lang="ts">
-  import AboutHero from '$lib/components/AboutHero.svelte';
-  import TimelineEvent from '$lib/components/TimelineEvent.svelte';
+  import { fly } from 'svelte/transition';
 
-  type TimelineSide = 'left' | 'right';
-  
-  interface TimelineEventType {
-      date: string;
-      title: string;
-      description: string;
-      side: TimelineSide;
-      modelUrl?: string;
-      cameraFov?: number;
-    }
-    
-  // Sample data for the timeline. This data is AI generated because I was lazy. I will be updating it with my actual experiences later.
-  const timelineEvents: TimelineEventType[] = [
-    {
-      date: 'June 2025 - Present',
-      title: 'Personal Portfolio Project',
-      description: 'Began working on a personal portfolio project to groom my online presence and showcase my skills and projects. This project is a work in progress, but I am excited to share it with the world once it is complete.',
-      side: 'left',
-      modelUrl: '/models/retro_computer.glb',
-      cameraFov: 85
-    },
-    {
-      date: 'June 9th, 2024',
-      title: 'Just Married!',
-      description: 'I married Rebecca, my best friend, in the North Georgia Mountains. Rebecca has been my biggest supporter and has encouraged me to pursue my dreams. I am so grateful to have her in my life.',
-      side: 'right',
-      modelUrl: '/models/diamond_ring.glb',
-      cameraFov: 30
-    },
-    {
-      date: '2024 - Present',
-      title: 'Software Engineer at Wetmore Enterprises',
-      description: 'As a full-stack developer, I contributed to several different projects, including co-engineering a lead distribution SaaS from concept to having active users in just five months. I modernized business operations by migrating over 150,000 records to a centralized database and automating manual processes. I experienced rapid growth, and developed data management skills and the ability to deliver impactful solutions in a fast paced, agile environemnt.',
-      side: 'left',
-      modelUrl: '/models/python_logo.glb',
-      cameraFov: 85
-    },
-    {
-      date: '2023 - 2024',
-      title: 'Marketing Representative at RangeWater Real Estate',
-      description: 'I worked as a top performing marketing and property management professional with expereience in the competitive Atlanta multi-family real estate market. I successfully managed property operations, including vendor relations and maintenance, while handling high-volume communications and resident relations. I was recognized as an "Ultimate Leaser," and I took on some project management and introductory IT responsibilities. This is where I began to use software development in my professional life, and I started to learn more about the field.',
-      side: 'right',
-      modelUrl: '/models/apartment.glb',
-      cameraFov: 40
-    },
-    {
-      date: '2022 - 2023',
-      title: 'Sous Chef at Marietta Melt Yard',
-      description: 'I opened a new restaurant in Marietta, GA, as the opening sous chef. I helped to develop the menu, manage inventory, train staff, and ensure high standards of food quality and safety. This experience honed my ability to work under intense pressure, manage multiple tasks simultaneously, and maintain a high level of attention to detail.',
-      side: 'left',
-      modelUrl: '/models/burger.glb',
-      cameraFov: 25
-    },
-    {
-      date: '2019 - 2023',
-      title: 'Line Cook at Prime 120',
-      description: 'I worked as a line cook at Prime 120, a high-end steakhouse in Woodstock, GA. I was responsible for preparing and cooking food to order, ensuring that all dishes met the restaurant\'s high standards of quality and presentation. This experience quickly taught me to work efficiently under intense pressure, manage my time effectively, and maintain a high level of attention to detail.',
-      side: 'right',
-      modelUrl: '/models/stew_pot.glb',
-      cameraFov: 15
-    },
-    {
-      date: '2018 - 2019',
-      title: 'Bartender at Partners Pizza',
-      description: 'I worked as a bartender at Partners Pizza, a popular local restaurant in Woodstock, GA. I was responsible for preparing and serving drinks, managing the bar area, and serving food to customers. This experience taught me how to work in a fast-paced environment, manage multiple tasks simultaneously, and maintain a positive attitude under pressure.',
-      side: 'left',
-      modelUrl: '/models/beer.glb',
-      cameraFov: 85
-    },
-    {
-      date: '2017 - 2019',
-      title: 'Server/Bartender at ICE Martini Bar',
-      description: 'I worked as a server and bartender at ICE Martini Bar, a popular local bar in Woodstock, GA. I was responsible for serving drinks, managing the bar area, and providing excellent customer service. This was my introduction to the service industry, and I obtained ServeSafe certification during this time. I developed many different skills during this time that I would carry with me throughout my career.',
-      side: 'right',
-      modelUrl: '/models/cocktail.glb',
-      cameraFov: 35
-    },
-    {
-      date: '2015 - 2019',
-      title: 'Attended Kennesaw State University',
-      description: 'I attended Kennesaw State University, where I studied psychology. I learned about human behavior, cognitive processes, and social interactions. This experience helped me to develop a strong understanding of how people think and behave, which has been invaluable in my career as a software engineer.',
-      side: 'left',
-      modelUrl: '/models/books.glb',
-      cameraFov: 45
-    },
-    {
-      date: '2015',
-      title: 'Graduated from Sequoyah High School',
-      description: 'I graduated from Sequoyah High School in Canton, GA. During my time there, I was involved in various extracurricular activities and developed a strong work ethic and an intense drive to learn that has carried me through my career. Through multiple introductory computer science classes, I discovered my passion for software development and began to explore the field further.',
-      side: 'right',
-      modelUrl: '/models/graduation_cap.glb',
-      cameraFov: 30
-    },
-    {
-      date: '2015 - 2017',
-      title: 'Senior Game Advisor at GameStop',
-      description: 'I worked as a Senior Game Advisor at GameStop, where I was responsible for providing excellent customer service, managing inventory, and assisting with sales. This helped fan the fire of my interest in technology and gaming, which eventually led me to pursue a career in software development.',
-      side: 'left'
-    },
-    {
-      date: '2014 - 2015',
-      title: 'First Job at Kroger',
-      description: 'I started my first job at Kroger, where I worked as a courtesy clerk. This experience taught me the importance of hard work, responsibility, and customer service. I learned how to manage my time effectively, work in a team, and communicate with customers.',
-      side: 'right'
-    },
-    {
-      date: '2008',
-      title: 'First Programming Language!',
-      description: 'I wrote my first program in the 6th grade using Visual Basic. I created a simple calculator program that could perform basic arithmetic operations. This experience sparked my interest in programming and I quickly began to explore the possibilites of software development. I built several small projects, and learned to tinker with game console file systems in order to mod games. This was the beginning of my journey into the world of software development.',
-      side: 'left'
-    },
-    {
-      date: 'June 14th, 1997',
-      title: 'Born in Palm Beach Gardens, Florida',
-      description: 'I was born in Palm Beach Gardens, Florida, and moved to Roswell, Georgia when I was too young to remember. At age 5, my family moved to Woodstock, Georgia. Growing up as an only child in Woodstock, I had lots of free time by myself, where I developed a love for technology and gaming. This passion eventually led me to pursue a career in software development.',
-      side: 'right'
-    },
-    {
-      date: 'approx. 11,700 B.C.E.',
-      title: 'Beginning of the Holocene Epoch',
-      description: 'The Holocene Epoch began around 11,700 years ago, marking the end of the last Ice Age and the beginning of a warmer and more stable climate. This period saw the rise of human civilization, with the development of agriculture, the domestication of animals, and the establishment of permanent settlements. The Holocene has been characterized by significant changes in the Earth\'s climate, ecosystems, and human societies.',
-      side: 'left',
-      modelUrl: '/models/caveman.glb',
-      cameraFov: 15
-    },
-    {
-      date: '2.6 Million B.C.E. - 11,700 B.C.E.',
-      title: 'Pleistocene Epoch',
-      description: 'The Pleistocene Epoch, also known as the Ice Age, lasted from about 2.6 million years ago to around 11,700 years ago. It was characterized by repeated glaciations, where large ice sheets covered much of the Northern Hemisphere. The Pleistocene saw the evolution and extinction of many species, including the woolly mammoth and saber-toothed cat. It was during this time that early humans began to develop tools and migrate across the globe.',
-      side: 'right',
-      modelUrl: '/models/mammoth.glb',
-      cameraFov: 30
-    },
-    {
-      date: '66 Million B.C.E. - Present',
-      title: 'Cenozoic Era',
-      description: 'The Cenozoic Era, also known as the Age of Mammals, began around 66 million years ago and continues to the present day. It is characterized by the rise of mammals and birds, the diversification of flowering plants, and significant geological and climatic changes. The Cenozoic has seen the evolution of many modern species, including humans, and has been marked by several mass extinctions and climate shifts.',
-      side: 'left',
-      modelUrl: '/models/flowers.glb',
-      cameraFov: 35
-    },
-    {
-      date: '252 Million B.C.E. - 66 Million B.C.E.',
-      title: 'Mesozoic Era',
-      description: 'The Mesozoic Era, also known as the Age of Reptiles, lasted from about 252 million years ago to around 66 million years ago. It was characterized by the dominance of dinosaurs, the evolution of birds and mammals, and the development of flowering plants. The Mesozoic saw significant geological and climatic changes, including the breakup of the supercontinent Pangaea and the rise of modern continents. Some of the characters of the hit film "Jurassic Park" were based on dinosaurs from this era.',
-      side: 'right',
-      modelUrl: '/models/dinosaur.glb',
-      cameraFov: 25
-    },
-    {
-      date: '541 Million B.C.E. - 252 Million B.C.E.',
-      title: 'Paleozoic Era',
-      description: 'The Paleozoic Era lasted from about 541 million years ago to around 252 million years ago. It was characterized by the diversification of marine life, the evolution of land plants and animals, and significant geological changes. The Paleozoic saw the development of complex ecosystems, including coral reefs, forests, and amphibians, and ended with one of the largest mass extinctions in Earth\'s history.',
-      side: 'left',
-      modelUrl: '/models/fish.glb',
-      cameraFov: 30
-    },
-    {
-      date: '2.5 Billion B.C.E. - 541 Million B.C.E.',
-      title: 'Proterozoic Eon',
-      description: 'The Proterozoic Eon lasted from about 2.5 billion years ago to around 541 million years ago. It was characterized by the development of simple life forms, including bacteria and algae, and the gradual buildup of oxygen in the atmosphere. The Proterozoic saw the emergence of multicellular organisms and the first evidence of sexual reproduction, setting the stage for the explosion of life in the subsequent Paleozoic Era.',
-      side: 'right',
-    },
-    {
-      date: '4 Billion B.C.E. - 2.5 Billion B.C.E.',
-      title: 'Archean Eon',
-      description: 'The Archean Eon lasted from about 4 billion years ago to around 2.5 billion years ago. It was characterized by the formation of the Earth\'s crust, the development of the first continents, and the emergence of simple life forms, primarily prokaryotic microorganisms. The Archean saw the establishment of the planet\'s earliest ecosystems and the beginning of biological processes that would shape the Earth\'s atmosphere and geology.',
-      side: 'left'
-    },
-    {
-      date: '4.6 Billion B.C.E. - 4 Billion B.C.E.',
-      title: 'Hadean Eon',
-      description: 'The Hadean Eon lasted from the formation of the Earth around 4.6 billion years ago to about 4 billion years ago. It was characterized by the planet\'s initial formation, the cooling of its surface, and the development of the first solid crust. The Hadean saw intense volcanic activity, the formation of the Moon, and the establishment of conditions that would eventually allow for the emergence of life.',
-      side: 'right'
-    },
-    {
-      date: '13.8 Billion B.C.E.',
-      title: 'The Big Bang',
-      description: 'The Big Bang is the leading explanation for the origin of the universe, occurring approximately 13.8 billion years ago. It marks the beginning of space and time, as well as the formation of all matter and energy in the universe. The Big Bang theory describes how the universe expanded from an extremely hot and dense state, leading to the formation of galaxies, stars, and planets over billions of years.',
-      side: 'left',
-      modelUrl: '/models/atom.glb',
-      cameraFov: 65
-    }
+  const skills = [
+    "SvelteKit", "React", "TypeScript", "Node.js", 
+    "Python", "Firebase", "Tailwind", "Git"
+  ];
+
+  const stats = [
+    { label: "Class", value: "Full Stack Dev" },
+    { label: "Base", value: "Marietta, GA" },
+    { label: "Exp", value: "3+ Years" },
+    { label: "Mana", value: "Coffee ☕" }
   ];
 </script>
 
-<main class="about-page-container">
-  <AboutHero />
+<main class="about-container">
+  
+  <div class="hex-bg"></div>
 
-  <div class="timeline-container">
-    {#each timelineEvents as event}
-      <TimelineEvent 
-        date={event.date}
-        title={event.title}
-        description={event.description}
-        side={event.side}
-        modelUrl={event.modelUrl}
-        cameraFov={event.cameraFov}
-      />
-    {/each}
+  <div class="content-wrapper">
+    
+    <div class="profile-section" in:fly={{x: -50, duration: 600, delay: 200}}>
+      <div class="holo-card">
+        <div class="scan-line"></div>
+        <div class="card-header">
+          <span class="id-badge">ID: AGNIKAS</span>
+          <span class="status-badge">ACTIVE</span>
+        </div>
+        
+        <div class="avatar-frame">
+          <div class="avatar"><img src="images/headshot.jpg" alt="Headshot of Angelo" /></div>
+          <div class="ring"></div>
+          <div class="ring inner"></div>
+        </div>
+
+        <div class="stats-grid">
+          {#each stats as stat}
+            <div class="stat-row">
+              <span class="stat-label">{stat.label}:</span>
+              <span class="stat-value">{stat.value}</span>
+            </div>
+          {/each}
+        </div>
+
+        <div class="card-footer">
+          <div class="barcode">|| | ||| | || |||</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-section" in:fly={{x: 50, duration: 600, delay: 400}}>
+      
+      <div class="terminal-block">
+        <div class="block-header">
+          <span class="cmd-prompt">> open user_bio.txt</span>
+        </div>
+        
+        <div class="bio-text">
+          <p>
+            <span class="comment">// THE ORIGIN STORY</span><br>
+            I am a developer who believes that code is more than just instructions—it's a tool to solve real human problems. I started my journey tampering with game files and broke enough computers to learn how to fix them.
+          </p>
+          <p>
+            <span class="comment">// CURRENT MISSION</span><br>
+            Today, I specialize in building high-performance web applications and automation scripts. I bridge the gap between "it works on my machine" and "it works for everyone."
+          </p>
+        </div>
+      </div>
+
+      <div class="tech-block">
+        <h3>EQUIPPED MODULES (SKILLS)</h3>
+        <div class="skill-cloud">
+          {#each skills as skill, i}
+            <div 
+              class="skill-chip" 
+              in:fly={{y: 10, delay: 600 + (i * 50)}}
+            >
+              <span class="decor">#</span> {skill}
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <a href="/resume.pdf" class="download-btn" target="_blank">
+        <span class="icon">⬇</span> DOWNLOAD_DATA_SHEET (RESUME)
+      </a>
+
+    </div>
+
   </div>
 </main>
 
 <style>
-    .about-page-container {
-        background-color: #f0f8ff;
-        color: #333;
-        min-height: calc(100vh - 80px);
-    }
+  :global(body) {
+    background-color: #0f172a;
+    margin: 0;
+  }
 
-    .timeline-container {
-        position: relative;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 4rem 2rem;
-    }
+  .about-container {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    font-family: 'JetBrains Mono', monospace;
+    color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
 
-    .timeline-container::after {
-        content: '';
-        position: absolute;
-        width: 6px;
-        background-color: #ccdbe6;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        margin-left: -3px;
-        z-index: 1;
+  .hex-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: 
+        radial-gradient(#334155 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+    mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    gap: 4rem;
+    max-width: 1000px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .profile-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .holo-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(79, 70, 229, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 320px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(79, 70, 229, 0.15);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+  .holo-card:hover {
+    transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+    border-color: #4f46e5;
+    box-shadow: 0 0 50px rgba(79, 70, 229, 0.3);
+  }
+
+  .scan-line {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 5px;
+    background: rgba(79, 70, 229, 0.5);
+    opacity: 0.5;
+    animation: scan 4s linear infinite;
+    box-shadow: 0 0 10px #4f46e5;
+  }
+  @keyframes scan {
+    0% { top: -10%; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 110%; opacity: 0; }
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #4f46e5;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 0.5rem;
+  }
+
+  .avatar-frame {
+    width: 120px; height: 120px;
+    margin: 0 auto 2rem auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .avatar {
+    font-size: 4rem;
+    z-index: 2;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+  .ring {
+    position: absolute;
+    width: 100%; height: 100%;
+    border: 2px dashed #4f46e5;
+    border-radius: 50%;
+    animation: spin 10s linear infinite;
+  }
+  .inner {
+    width: 80%; height: 80%;
+    border: 2px solid rgba(79, 70, 229, 0.3);
+    animation: spin 6s linear infinite reverse;
+  }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+
+  .stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    border-bottom: 1px dashed #334155;
+    padding-bottom: 0.25rem;
+  }
+  .stat-label { color: #94a3b8; }
+  .stat-value { color: #f8fafc; font-weight: bold; }
+
+  .card-footer {
+    margin-top: 2rem;
+    text-align: center;
+    opacity: 0.5;
+    font-family: 'Courier New', courier, monospace;
+    letter-spacing: 4px;
+    font-size: 0.7rem;
+  }
+
+  .bio-section {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .terminal-block {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #10b981;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+  }
+  .block-header {
+    margin-bottom: 1rem;
+    color: #10b981;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  .bio-text p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+  .comment {
+    color: #64748b;
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+  }
+
+  .tech-block h3 {
+    font-size: 1rem;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+  .skill-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .skill-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #e2e8f0;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-chip:hover {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: #10b981;
+    transform: translateY(-2px);
+  }
+  .decor { color: #10b981; margin-right: 4px; opacity: 0.7; }
+
+  .download-btn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #f8fafc;
+    color: #0f172a;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    border: 2px solid #f8fafc;
+    box-sizing: border-box;
+  }
+  .download-btn:hover {
+    background: transparent;
+    color: #f8fafc;
+    box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  }
+
+  @media (max-width: 900px) {
+    .about-container {
+      align-items: center;
+      overflow-y: auto;
+      padding: 2rem 1.5rem 2rem 1.5rem;
+      height: auto;
     }
+    .content-wrapper {
+      flex-direction: column;
+      gap: 3rem;
+      width: 100%;
+    }
+    .profile-section {
+      width: 100%;
+    }
+    .bio-section {
+      width: 100%;
+    }
+    .download-btn {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 1rem 0.5rem;
+        text-align: center;
+        white-space: normal;
+        max-width: 100%;
+    }
+  }
 </style>
