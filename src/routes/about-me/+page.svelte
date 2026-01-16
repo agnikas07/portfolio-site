@@ -3,7 +3,8 @@
 
   const skills = [
     "SvelteKit", "React", "TypeScript", "Node.js", 
-    "Python", "Firebase", "Tailwind", "Git"
+    "Python", "MongoDB", "Firebase", "Google Apps Script", "Tailwind", "Git",
+    "REST APIs", "CI/CD", "GCP"
   ];
 
   const stats = [
