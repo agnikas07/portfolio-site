@@ -2,6 +2,32 @@
   import { onMount, onDestroy } from 'svelte';
   import VisitorCounter from '$lib/components/VisitorCounter.svelte';
   import Matter from 'matter-js';
+
+  const schemaOrg = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "name": "Angelo Nikas",
+        "alternateName": "agnikas",
+        "url": "https://agnikas.dev",
+        "jobTitle": "Software Engineer",
+        "image": "https://agnikas.dev/images/logo.png",
+        "sameAs": [
+          "https://github.com/agnikas07",
+          "https://www.linkedin.com/in/angelo-nikas-bab82a2a4/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "name": "Angelo Nikas - Creative Technologist",
+        "alternateName": "agnikas.dev",
+        "url": "https://agnikas.dev"
+      }
+    ]
+  };
+
+  const jsonLdString = JSON.stringify(schemaOrg);
   
   let revealContent = false;
   let showVisitorCounter = false;
@@ -106,6 +132,25 @@
   });
 </script>
 
+<svelte:head>
+  <title>Angelo Nikas (agnikas) | Software Engineer & Creative Developer</title>
+  <meta name="description" content="The personal site of Angelo Nikas, a software engineer and creative developer. Explore projects, tools, and freelance services." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://agnikas.dev" />
+  <meta property="og:title" content="Angelo Nikas (agnikas) | Software Developer" />
+  <meta property="og:description" content="The personal site of Angelo Nikas, a software engineer and creative developer. Specializing in interactive web experiences and automation." />
+  <meta property="og:image" content="https://agnikas.dev/images/logo.png" />
+
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://agnikas.dev/" />
+  <meta property="twitter:title" content="Angelo Nikas (agnikas)" />
+  <meta property="twitter:description" content="Software Engineer & Creative Technologist. Building interactive experiences." />
+  <meta property="twitter:image" content="https://agnikas.dev/images/logo.png" />
+
+  {@html `<script type="application/ld+json">${jsonLdString}</script>`}
+</svelte:head>
+
 <main class="main-content welcome-page">
   <div class="page-body">
     <div class="welcome-text">
@@ -134,15 +179,73 @@
 <div class="content-overlay" class:hidden={revealContent}></div>
 
 <style>
-  .main-content { background-color: #B0E0E6; position: relative; }
-  .page-body { min-height: calc(100vh - 80px); padding: 2rem; color: #333; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
-  .welcome-text { max-width: 700px; text-align: center; }
-  .welcome-text h2 { font-size: 3.5rem; font-weight: 700; color: #1a2729; margin-bottom: 1.5rem; }
-  .welcome-text p { font-size: 1.2rem; line-height: 1.7; color: #334e52; }
-  .egg-trigger { cursor: pointer; text-decoration: underline; font-weight: bold; }
-  :global(.easter-egg) { position: fixed; font-size: 40px; pointer-events: none; transform-origin: 50% 50%; user-select: none; z-index: 240; }
-  .visitor-counter-wrapper { position: absolute; top: 1rem; right: 1.5rem; }
-  :global(.spark) { position: fixed; background-color: #ffdd59; border-radius: 50%; box-shadow: 0 0 8px #ffdd59, 0 0 12px #ff6600, 0 0 16px #ffffff; pointer-events: none; transform: translate(-50%, -50%); z-index: 250; }
-  .content-overlay { position: fixed; top: 80px; left: 0; width: 100%; height: calc(100vh - 80px); background-color: black; z-index: 100; transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1); transform: translateY(0%); }
-  .content-overlay.hidden { transform: translateY(100%); }
+  .main-content { 
+    background-color: #B0E0E6; 
+    position: relative; 
+  }
+  .page-body { 
+    min-height: calc(100vh - 80px); 
+    padding: 2rem; 
+    color: #333; 
+    box-sizing: border-box; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+  }
+  .welcome-text { 
+    max-width: 700px; 
+    text-align: center; 
+  }
+  .welcome-text h2 {
+    font-size: 3.5rem; 
+    font-weight: 700; 
+    color: #1a2729; 
+    margin-bottom: 1.5rem; 
+  }
+  .welcome-text p { 
+    font-size: 1.2rem; 
+    line-height: 1.7; 
+    color: #334e52; 
+  }
+  .egg-trigger { 
+    cursor: pointer; 
+    text-decoration: underline; 
+    font-weight: bold; 
+  }
+  :global(.easter-egg) { 
+    position: fixed; 
+    font-size: 40px; 
+    pointer-events: none; 
+    transform-origin: 50% 50%; 
+    user-select: none; 
+    z-index: 240; 
+  }
+  .visitor-counter-wrapper { 
+    position: absolute; 
+    top: 1rem; 
+    right: 1.5rem; 
+  }
+  :global(.spark) { 
+    position: fixed; 
+    background-color: #ffdd59; 
+    border-radius: 50%; 
+    box-shadow: 0 0 8px #ffdd59, 0 0 12px #ff6600, 0 0 16px #ffffff; 
+    pointer-events: none; 
+    transform: translate(-50%, -50%); 
+    z-index: 250; 
+  }
+  .content-overlay { 
+    position: fixed; 
+    top: 80px; 
+    left: 0; 
+    width: 100%; 
+    height: calc(100vh - 80px); 
+    background-color: black; 
+    z-index: 100; 
+    transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1); 
+    transform: translateY(0%); 
+  }
+  .content-overlay.hidden { 
+    transform: translateY(100%); 
+  }
 </style>
