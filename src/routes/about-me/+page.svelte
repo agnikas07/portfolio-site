@@ -3,7 +3,7 @@
 
   const skills = [
     "SvelteKit", "React", "TypeScript", "Node.js", 
-    "Python", "MongoDB", "Firebase", "Google Apps Script", "Tailwind", "Git",
+    "Python", "MongoDB", "Firebase", "SQL", "Google Apps Script", "Tailwind", "Git",
     "REST APIs", "CI/CD", "GCP"
   ];
 
@@ -59,11 +59,11 @@
         
         <div class="bio-text">
           <p>
-            <span class="comment">// THE ORIGIN STORY</span><br>
+            <span class="comment">// THE ORIGIN STORY</span>
             I am a developer who believes that code is more than just instructions—it's a tool to solve real human problems. I started my journey tampering with game files and broke enough computers to learn how to fix them.
           </p>
           <p>
-            <span class="comment">// CURRENT MISSION</span><br>
+            <span class="comment">// CURRENT MISSION</span>
             Today, I specialize in building high-performance web applications and automation scripts. I bridge the gap between "it works on my machine" and "it works for everyone."
           </p>
         </div>
@@ -248,7 +248,7 @@
     flex: 1.5;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .terminal-block {
@@ -285,7 +285,7 @@
   .skill-cloud {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
   .skill-chip {
     background: rgba(255, 255, 255, 0.05);
