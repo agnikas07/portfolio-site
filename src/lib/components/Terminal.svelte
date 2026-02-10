@@ -31,7 +31,7 @@
     } else if (trimmedCommand === 'clear') {
       displayedText = '';
     } else if (trimmedCommand === 'help' || trimmedCommand === 'ls') {
-      alert('Commands: cd, clear, help, ls\n\nAvailable directories: about-me, projects, contact');
+      alert('Commands: cd, clear, help, ls\n\nAvailable directories: ~, about-me, services, projects, contact');
     } else if (trimmedCommand === 'exit') {
       window.close();
     }
